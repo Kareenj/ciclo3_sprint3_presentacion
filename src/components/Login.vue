@@ -73,12 +73,12 @@ export default {
 }
 
 #inline-form2-input-name {
-  margin: 145px 20px 10px 10px;
+  margin: 143px 20px 10px 10px;
   position: relative;
 }
 
 #inline-form2-input-apellido {
-  margin: 145px 20px 10px 10px;
+  margin: 143px 20px 10px 10px;
   position: relative;
 }
 
@@ -96,5 +96,7 @@ export default {
 
 #button_registro {
   font-family: Roboto, Arial, sans-serif;
+  margin: 9px 20px 20px 0px;
+  left: 3%;
 }
 </style>
