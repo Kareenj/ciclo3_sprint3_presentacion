@@ -68,6 +68,7 @@ export default {
 
 <style>
 body {
+  background-color: #004aad;
   display: flex;
   flex-direction: column;
   min-height: 100%;
