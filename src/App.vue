@@ -16,8 +16,16 @@
           >
           <b-button id="button" variant="primary">Reportes</b-button>
 
-          
+          <span v-show="loggedIn">
+            Hola {{ usuario }}
+            <b-button v-on:click="logout"> Cerrar Sesion </b-button>
+          </span>
 
+          <span v-show="!loggedIn">
+            <b-button id="button" variant="primary" v-on:click="login">
+              Iniciar sesion
+            </b-button>
+          </span>
         </b-navbar>
       </div>
 
@@ -44,7 +52,13 @@ export default {
     },
     loggedIn() {
       return this.$store.state.authentication.status.loggedIn;
-    }
+    },
+    usuario() {
+      if (localStorage.getItem("user")) {
+        return localStorage.getItem("username");
+      }
+      return "";
+    },
   },
   methods: {
     init: function () {
@@ -56,6 +70,10 @@ export default {
       if (this.$route.name != "log") {
         this.$router.push({ name: "log" });
       }
+    },
+    logout: function () {
+      const { dispatch } = this.$store;
+      dispatch("authentication/logout");
     },
     egresos_form: function () {
       if (this.$route.name != "egresos") {

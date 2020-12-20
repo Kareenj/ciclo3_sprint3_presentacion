@@ -1,6 +1,6 @@
 <template>
-
-  <b-form inline id="inline-form-input-name">
+  <div class="formulario">
+    <h1>Iniciar sesion</h1>
     <form @submit.prevent="handleSubmit">
       <label class="sr-only" for="inline-form-input-username">Usuario</label>
       <b-form-input
@@ -9,6 +9,9 @@
         placeholder="Escribe tu username"
         v-model="username"
       >
+
+      <br/>
+
       </b-form-input>
       <label class="sr-only" for="inline-form-input-contrasena"
         >Contraseña</label
@@ -17,69 +20,51 @@
         id="inline-form-input-contrasena"
         class="mb-2 mr-sm-2 mb-sm-0"
         placeholder="Escribe tu contraseña"
+        type="password"
         v-model="password"
       >
       </b-form-input>
 
-      <b-button type="submit" id="button_ingresar" variant="primary">Ingresar</b-button>
+      <b-button type="submit" id="button_ingresar" variant="primary"
+        >Ingresar</b-button
+      >
     </form>
 
-    <aside id="form_registro">
-      <label class="sr-only" for="inline-form2-input-name">Nombre</label>
-      <b-form-input
-        id="inline-form2-input-name"
-        class="mb-2 mr-sm-2 mb-sm-0"
-        placeholder="Escribe tu nombre"
-      >
-      </b-form-input>
+    <br />
 
-      <label class="sr-only" for="inline-form2-input-name">Apellido</label>
-      <b-form-input
-        id="inline-form2-input-apellido"
-        class="mb-2 mr-sm-2 mb-sm-0"
-        placeholder="Escribe tu apellido"
-      >
-      </b-form-input>
-
-      <label class="sr-only" for="inline-form2-input-correo">Correo</label>
-        <b-input-group class="mb-2 mr-sm-2 mb-sm-0">
-        <b-form-input
-          id="inline-form2-input-correo"
-          placeholder="Escribe tu correo"
-        >
-        </b-form-input>
-      </b-input-group>
-
-      <b-button id="button_registro" variant="primary">Registro</b-button>
-    </aside>
-  </b-form>
+    <b-button v-on:click="registrarse" variant="primary">Registrarse</b-button>
+  </div>
 </template>
 
 <script>
 export default {
   name: "Login",
-  data () {
-        return {
-            username: '',
-            password: '',
-            submitted: false
-        }
+  data() {
+    return {
+      username: "",
+      password: "",
+      submitted: false,
+    };
+  },
+  methods: {
+    registrarse: function () {
+      if (this.$route.name != "registro") {
+        this.$router.push({ name: "registro" });
+      }
     },
-    methods: {
-        handleSubmit (e) {
-            this.submitted = true;
-            const { username, password } = this;
-            const { dispatch } = this.$store;
-            if (username && password) {
-                dispatch('authentication/login', { username, password });
-            }
-        }
-    }
+    handleSubmit(e) {
+      this.submitted = true;
+      const { username, password } = this;
+      const { dispatch } = this.$store;
+      if (username && password) {
+        dispatch("authentication/login", { username, password });
+      }
+    },
+  },
 };
 </script>
 
 <style>
-
 #form_registro {
   text-align: center;
 }

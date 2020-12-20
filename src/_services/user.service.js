@@ -21,6 +21,7 @@ function login(username, password) {
             if (user.access_token) {
                 // Almacenar los detalles del usuario y el token jwt en el localstorage para que el usuario siga autenticado aun cuando actualice la pagina
                 localStorage.setItem('user', JSON.stringify(user));
+                localStorage.setItem("username", username);
             }
             return user;
         });
@@ -28,7 +29,6 @@ function login(username, password) {
 
 function logout() {
     // Eliminar el usuario del localstorage para hacer logout
-    alert("logout");
     localStorage.removeItem('user');
 }
 

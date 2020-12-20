@@ -21,6 +21,7 @@ export const authentication = {
                     },
                     error => {
                         commit('loginFailure', error);
+                        alert("Usuario o contraseña invalidos");
                         dispatch('alert/error', error, { root: true });
                     }
                 );

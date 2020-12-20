@@ -1,9 +1,11 @@
 import vueRouter from 'vue-router'
 import Login from './components/Login'
+import Registro from './components/Registro'
 import App from './App'
 import Home from './components/Home'
 import Ingresos from './components/Ingresos'
 import Egresos from './components/Egresos'
+
 
 const router = new vueRouter({
     mode: 'history',
@@ -23,6 +25,11 @@ const router = new vueRouter({
             path: '/login',
             name: "log",
             component: Login
+        },
+        {
+            path: '/registro',
+            name: "registro",
+            component: Registro
         },
         {
             path: '/egresos',
