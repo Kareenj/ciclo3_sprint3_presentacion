@@ -52,22 +52,6 @@
 import axios from "axios";
 export default {
   name: "home",
-  methods: {},
-
-  data: () => ({
-    result: null,
-  }),
-  created() {
-    axios
-      .get("http://127.0.0.1:8000/get_egreso2/", "Eduardo1")
-      .then((result) => {
-        this.result = result.data;
-      })
-
-      .catch((error) => {
-        alert("ERROR servidor");
-      });
-  },
 };
 </script>
 

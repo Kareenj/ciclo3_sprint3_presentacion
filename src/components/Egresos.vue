@@ -50,6 +50,7 @@
 
 <script>
 import axios from "axios";
+import { authHeader } from "../_helpers";
 export default {
   name: "Egresos",
   methods: {
@@ -66,11 +67,17 @@ export default {
         tipo_gasto: "",
       };
 
+      var axios = require("axios");
+
+      var config = {
+        method: "get",
+        url: "http://127.0.0.1:8000/get_egreso/" + this.id,
+        headers: authHeader(),
+      };
+
       let self = this;
-      axios
-        .get(
-          "https://finanzas-personales-5.herokuapp.com/get_egreso/" + this.username + "/" + this.id
-        )
+
+      axios(config)
         .then((result) => {
           self.gasto = result.data;
           document.getElementById(
@@ -87,6 +94,9 @@ export default {
     },
 
     actualizar: function () {
+      let self = this;
+
+      var axios = require("axios");
       this.gasto_actualizar = {
         username: localStorage.getItem("current_username"),
         id_gasto: document.getElementById("id_gasto").value,
@@ -97,9 +107,14 @@ export default {
         tipo_gasto: document.getElementById("tipo_gasto").value,
       };
 
-      let self = this;
-      axios
-        .post("https://finanzas-personales-5.herokuapp.com/updated_egreso", this.gasto_actualizar)
+      var config = {
+        method: "post",
+        url: "http://127.0.0.1:8000/updated_egreso/",
+        headers: authHeader(),
+        data: this.gasto_actualizar,
+      };
+
+      axios(config)
         .then((result) => {
           alert("OK Egreso actualizado");
         })

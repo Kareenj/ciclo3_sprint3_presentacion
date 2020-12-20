@@ -2,6 +2,7 @@
 // (runtime-only or standalone) has been set in webpack.base.conf with an alias.
 import Vue from 'vue'
 import App from './App'
+import { store } from './_store';
 import vueRouter from 'vue-router'
 import router from './router'
 import { BootstrapVue, IconsPlugin } from 'bootstrap-vue'
@@ -21,6 +22,18 @@ Vue.config.productionTip = false
 new Vue({
   el: '#app',
   router,
+  store,
   components: { App },
   template: '<App/>'
+})
+
+router.beforeEach((to, from, next) => {
+  // redirect to login page if not logged in and trying to access a restricted page
+  const publicPages = ['/login'];
+  const authRequired = !publicPages.includes(to.path);
+  const loggedIn = localStorage.getItem('user');
+  if (authRequired && !loggedIn) {
+    return next('/login');
+  }
+  next();
 })

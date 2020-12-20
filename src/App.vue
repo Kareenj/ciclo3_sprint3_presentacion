@@ -8,9 +8,6 @@
           <img v-on:click="init" src="./assets/finanzas.png" />
           <b-navbar-brand href="#"></b-navbar-brand>
 
-          <b-button v-on:click="login" id="button" variant="primary"
-            >LogIn</b-button
-          >
           <b-button v-on:click="ingresos_form" id="button" variant="primary"
             >Ingresos</b-button
           >
@@ -18,6 +15,9 @@
             >Egresos</b-button
           >
           <b-button id="button" variant="primary">Reportes</b-button>
+
+          
+
         </b-navbar>
       </div>
 
@@ -36,10 +36,15 @@ export default {
   name: "App",
   components: {},
   beforeCreate: function () {
-    localStorage.setItem("current_username", "Maria2");
-    localStorage.setItem("isAuth", true);
-
     this.$router.push({ name: "home" });
+  },
+  computed: {
+    loggingIn() {
+      return this.$store.state.authentication.status.loggingIn;
+    },
+    loggedIn() {
+      return this.$store.state.authentication.status.loggedIn;
+    }
   },
   methods: {
     init: function () {
@@ -157,8 +162,8 @@ h4 {
   box-shadow: 0 2px 5px #ccc;
   text-align: center;
   width: 75%;
-  margin-left:auto;
-  margin-right:auto;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 input,

@@ -1,12 +1,13 @@
 <template>
 
   <b-form inline id="inline-form-input-name">
-    <article>
+    <form @submit.prevent="handleSubmit">
       <label class="sr-only" for="inline-form-input-username">Usuario</label>
       <b-form-input
         id="inline-form-input-username"
         class="mb-2 mr-sm-2 mb-sm-0"
         placeholder="Escribe tu username"
+        v-model="username"
       >
       </b-form-input>
       <label class="sr-only" for="inline-form-input-contrasena"
@@ -16,11 +17,12 @@
         id="inline-form-input-contrasena"
         class="mb-2 mr-sm-2 mb-sm-0"
         placeholder="Escribe tu contraseña"
+        v-model="password"
       >
       </b-form-input>
 
-      <b-button id="button_ingresar" variant="primary">Ingresar</b-button>
-    </article>
+      <b-button type="submit" id="button_ingresar" variant="primary">Ingresar</b-button>
+    </form>
 
     <aside id="form_registro">
       <label class="sr-only" for="inline-form2-input-name">Nombre</label>
@@ -56,7 +58,23 @@
 <script>
 export default {
   name: "Login",
-  components: {},
+  data () {
+        return {
+            username: '',
+            password: '',
+            submitted: false
+        }
+    },
+    methods: {
+        handleSubmit (e) {
+            this.submitted = true;
+            const { username, password } = this;
+            const { dispatch } = this.$store;
+            if (username && password) {
+                dispatch('authentication/login', { username, password });
+            }
+        }
+    }
 };
 </script>
 
